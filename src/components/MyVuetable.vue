@@ -7,24 +7,31 @@
       pagination-path=""
       @vuetable:pagination-data="onPaginationData"
     ></vuetable>
-    <vuetable-pagination ref="pagination"
-      :css="cssPagination"
-      :icons="icons"
-      @vuetable-pagination:change-page="onChangePage"
-    ></vuetable-pagination>
+    <div>
+      <vuetable-pagination-info ref="paginationInfo"
+        info-class="pull-left"
+      ></vuetable-pagination-info>
+      <vuetable-pagination ref="pagination"
+        :css="cssPagination"
+        :icons="icons"
+        @vuetable-pagination:change-page="onChangePage"
+      ></vuetable-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 import Vuetable from 'vuetable-2/src/components/Vuetable'
 import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
+import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
 import accounting from 'accounting'
 import moment from 'moment'
 
 export default {
   components: {
     Vuetable,
-    VuetablePagination
+    VuetablePagination,
+    VuetablePaginationInfo
   },
   data () {
   	return {
@@ -32,7 +39,7 @@ export default {
         tableClass: 'table table-striped table-bordered'
       },
       cssPagination: {
-        wrapperClass: 'pagination',
+        wrapperClass: 'pagination pull-right',
         activeClass: 'btn-primary',
         disabledClass: 'disabled',
         pageClass: 'btn btn-border',
@@ -90,6 +97,7 @@ export default {
     },
     onPaginationData (paginationData) {
       this.$refs.pagination.setPaginationData(paginationData)
+      this.$refs.paginationInfo.setPaginationData(paginationData)
     },
     onChangePage (page) {
       this.$refs.vuetable.changePage(page)
@@ -98,8 +106,14 @@ export default {
 }
 </script>
 <style>
+.pagination {
+  margin-top: 0;
+}
 .btn.btn-border {
   border: 1px solid;
   margin-right: 2px;
+}
+.vuetable-pagination-info {
+  margin-top: 8px !important;
 }
 </style>
