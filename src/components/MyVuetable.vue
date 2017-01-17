@@ -1,7 +1,7 @@
 <template>
   <vuetable ref="vuetable"
     api-url="http://vuetable.ratiw.net/api/users"
-    :fields="['name', 'email', 'birthdate', 'address.line1', 'address.line2', 'address.zipcode']"
+    :fields="fields"
     :css="css"
   ></vuetable>
 </template>
@@ -17,7 +17,11 @@ export default {
   	return {
       css: {
         tableClass: 'table table-striped table-bordered'
-      }
+      },
+      fields: [
+        'name', 'email', 'birthdate', 
+        'address.line1', 'address.line2', 'address.zipcode'
+      ]
   	}
   }
 }
