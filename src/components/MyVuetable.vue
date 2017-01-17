@@ -1,15 +1,6 @@
 <template>
   <div class="container">
-    <div>
-      <vuetable-pagination-info ref="paginationInfoTop"
-        info-class="pull-left""
-      ></vuetable-pagination-info>
-      <vuetable-pagination ref="paginationTop"
-        :css="cssPagination"
-        :icons="icons"
-        @vuetable-pagination:change-page="onChangePage"
-      ></vuetable-pagination>
-    </div>
+    <filter-bar></filter-bar>
     <vuetable ref="vuetable"
       api-url="http://vuetable.ratiw.net/api/users"
       :fields="fields"
@@ -20,6 +11,7 @@
       multi-sort-key="ctrl"
       :sort-order="sortOrder"
       detail-row-component="my-detail-row"
+      :append-params="moreParams"
       @vuetable:cell-clicked="onCellClicked"
       @vuetable:pagination-data="onPaginationData"
     ></vuetable>
@@ -45,6 +37,9 @@ import moment from 'moment'
 import Vue from 'vue'
 import CustomActions from './CustomActions'
 import DetailRow from './DetailRow'
+import FilterBar from './FilterBar'
+import VueEvents from 'vue-events'
+Vue.use(VueEvents)
 
 Vue.component('custom-actions', CustomActions)
 Vue.component('my-detail-row', DetailRow)
@@ -53,7 +48,8 @@ export default {
   components: {
     Vuetable,
     VuetablePagination,
-    VuetablePaginationInfo
+    VuetablePaginationInfo,
+    FilterBar
   },
   data () {
   	return {
@@ -135,7 +131,8 @@ export default {
           sortField: 'email',
           direction: 'asc'
         }
-      ]
+      ],
+      moreParams: {}
   	}
   },
   methods: {
@@ -156,9 +153,6 @@ export default {
         : moment(value, 'YYYY-MM-DD').format(fmt)
     },
     onPaginationData (paginationData) {
-      this.$refs.paginationTop.setPaginationData(paginationData)
-      this.$refs.paginationInfoTop.setPaginationData(paginationData)
-
       this.$refs.pagination.setPaginationData(paginationData)
       this.$refs.paginationInfo.setPaginationData(paginationData)
     },
@@ -168,6 +162,19 @@ export default {
     onCellClicked (data, field, event) {
       console.log('cellClicked: ', field.name)
       this.$refs.vuetable.toggleDetailRow(data.id)
+    },
+  },
+  events: {
+    'filter-set' (filterText) {
+      this.moreParams = {
+        'filter': filterText
+      }
+      Vue.nextTick( () => this.$refs.vuetable.refresh())
+    },
+    'filter-reset' () {
+      this.moreParams = {}
+      this.$refs.vuetable.refresh()
+      Vue.nextTick( () => this.$refs.vuetable.refresh())
     }
   }
 }

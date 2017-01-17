@@ -3461,6 +3461,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-events@vue-2.x:
+  version "2.0.0-beta"
+  resolved "https://registry.yarnpkg.com/vue-events/-/vue-events-2.0.0-beta.tgz#adbe744af921a39f46fe350c78f478c34f4ad170"
+
 vue-hot-reload-api@^2.0.1:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.7.tgz#45bd46cfeee7fd22550b467a76fa0c4a0ceae51b"
