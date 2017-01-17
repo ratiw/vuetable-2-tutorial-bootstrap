@@ -40,6 +40,10 @@ import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo'
 import accounting from 'accounting'
 import moment from 'moment'
+import Vue from 'vue'
+import CustomActions from './CustomActions'
+
+Vue.component('custom-actions', CustomActions)
 
 export default {
   components: {
@@ -54,6 +58,7 @@ export default {
         loadingClass: 'loading',
         ascendingIcon: 'glyphicon glyphicon-chevron-up',
         descendingIcon: 'glyphicon glyphicon-chevron-down',
+        sortHandleIcon: 'glyphicon glyphicon-menu-hamburger',
       },
       cssPagination: {
         wrapperClass: 'pagination pull-right',
@@ -69,6 +74,11 @@ export default {
         last: '',
       },
       fields: [
+        {
+          name: '__checkbox',
+          titleClass: 'text-center',
+          dataClass: 'text-center',
+        },          
         {
           name: 'name',
           sortField: 'name'
@@ -107,6 +117,12 @@ export default {
           titleClass: 'text-center',
           dataClass: 'text-right',
           callback: 'formatNumber',
+        },
+        {
+          name: '__component:custom-actions',
+          title: 'Actions',
+          titleClass: 'text-center',
+          dataClass: 'text-center'
         }
       ],
       sortOrder: [
