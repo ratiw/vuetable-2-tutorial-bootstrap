@@ -27,4 +27,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+table.vuetable {
+  text-align: left;
+}
 </style>
