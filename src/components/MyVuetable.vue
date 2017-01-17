@@ -16,6 +16,9 @@
       :css="css"
       pagination-path=""
       :per-page="20"
+      :multi-sort="true"
+      multi-sort-key="ctrl"
+      :sort-order="sortOrder"
       @vuetable:pagination-data="onPaginationData"
     ></vuetable>
     <div>
@@ -47,7 +50,10 @@ export default {
   data () {
   	return {
       css: {
-        tableClass: 'table table-striped table-bordered'
+        tableClass: 'table table-striped table-bordered',
+        loadingClass: 'loading',
+        ascendingIcon: 'glyphicon glyphicon-chevron-up',
+        descendingIcon: 'glyphicon glyphicon-chevron-down',
       },
       cssPagination: {
         wrapperClass: 'pagination pull-right',
@@ -63,28 +69,51 @@ export default {
         last: '',
       },
       fields: [
-        'name', 'email', 
+        {
+          name: 'name',
+          sortField: 'name'
+        }, 
+        {
+          name: 'email', 
+          sortField: 'email'
+        },
+        {
+          name: 'age',
+          sortField: 'birthdate',
+          dataClass: 'text-center'
+        },
         {
           name: 'birthdate',
+          sortField: 'birthdate',
           titleClass: 'text-center',
           dataClass: 'text-center',
           callback: 'formatDate|DD-MM-YYYY'
         },
         {
           name: 'nickname',
+          sortField: 'nickname',
           callback: 'allcap'
         },
         {
           name: 'gender',
+          sortField: 'gender',
           titleClass: 'text-center',
           dataClass: 'text-center',
           callback: 'genderLabel'
         },
         {
           name: 'salary',
+          sortField: 'salary',
           titleClass: 'text-center',
           dataClass: 'text-right',
           callback: 'formatNumber',
+        }
+      ],
+      sortOrder: [
+        {
+          field: 'email',
+          sortField: 'email',
+          direction: 'asc'
         }
       ]
   	}
