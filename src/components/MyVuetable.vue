@@ -19,18 +19,24 @@ export default {
         tableClass: 'table table-striped table-bordered'
       },
       fields: [
-        'name', 'email', 'birthdate', 
+        'name', 'email', 
         {
-          name: 'address.line1',
-          title: 'Address 1'
+          name: 'birthdate',
+          titleClass: 'text-center',
+          dataClass: 'text-center'
         },
         {
-          name: 'address.line2',
-          title: 'Address 2'
+          name: 'nickname',
         },
         {
-          name: 'address.zipcode',
-          title: 'Zipcode'
+          name: 'gender',
+          titleClass: 'text-center',
+          dataClass: 'text-center'
+        },
+        {
+          name: 'salary',
+          titleClass: 'text-center',
+          dataClass: 'text-right'
         }
       ]
   	}
