@@ -1,24 +1,48 @@
 <template>
-  <vuetable ref="vuetable"
-    api-url="http://vuetable.ratiw.net/api/users"
-    :fields="fields"
-    :css="css"
-  ></vuetable>
+  <div class="container">
+    <vuetable ref="vuetable"
+      api-url="http://vuetable.ratiw.net/api/users"
+      :fields="fields"
+      :css="css"
+      pagination-path=""
+      @vuetable:pagination-data="onPaginationData"
+    ></vuetable>
+    <vuetable-pagination ref="pagination"
+      :css="cssPagination"
+      :icons="icons"
+      @vuetable-pagination:change-page="onChangePage"
+    ></vuetable-pagination>
+  </div>
 </template>
 
 <script>
 import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
 import accounting from 'accounting'
 import moment from 'moment'
 
 export default {
   components: {
-    Vuetable
+    Vuetable,
+    VuetablePagination
   },
   data () {
   	return {
       css: {
         tableClass: 'table table-striped table-bordered'
+      },
+      cssPagination: {
+        wrapperClass: 'pagination',
+        activeClass: 'btn-primary',
+        disabledClass: 'disabled',
+        pageClass: 'btn btn-border',
+        linkClass: 'btn btn-border',
+      },
+      icons: {
+        first: '',
+        prev: '',
+        next: '',
+        last: '',
       },
       fields: [
         'name', 'email', 
@@ -63,7 +87,19 @@ export default {
       return (value == null)
         ? ''
         : moment(value, 'YYYY-MM-DD').format(fmt)
+    },
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
+    },
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
     }
   }
 }
 </script>
+<style>
+.btn.btn-border {
+  border: 1px solid;
+  margin-right: 2px;
+}
+</style>
