@@ -19,6 +19,8 @@
       :multi-sort="true"
       multi-sort-key="ctrl"
       :sort-order="sortOrder"
+      detail-row-component="my-detail-row"
+      @vuetable:cell-clicked="onCellClicked"
       @vuetable:pagination-data="onPaginationData"
     ></vuetable>
     <div>
@@ -42,8 +44,10 @@ import accounting from 'accounting'
 import moment from 'moment'
 import Vue from 'vue'
 import CustomActions from './CustomActions'
+import DetailRow from './DetailRow'
 
 Vue.component('custom-actions', CustomActions)
+Vue.component('my-detail-row', DetailRow)
 
 export default {
   components: {
@@ -160,6 +164,10 @@ export default {
     },
     onChangePage (page) {
       this.$refs.vuetable.changePage(page)
+    },
+    onCellClicked (data, field, event) {
+      console.log('cellClicked: ', field.name)
+      this.$refs.vuetable.toggleDetailRow(data.id)
     }
   }
 }
