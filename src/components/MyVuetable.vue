@@ -1,15 +1,26 @@
 <template>
   <div class="container">
+    <div>
+      <vuetable-pagination-info ref="paginationInfoTop"
+        info-class="pull-left""
+      ></vuetable-pagination-info>
+      <vuetable-pagination ref="paginationTop"
+        :css="cssPagination"
+        :icons="icons"
+        @vuetable-pagination:change-page="onChangePage"
+      ></vuetable-pagination>
+    </div>
     <vuetable ref="vuetable"
       api-url="http://vuetable.ratiw.net/api/users"
       :fields="fields"
       :css="css"
       pagination-path=""
+      :per-page="20"
       @vuetable:pagination-data="onPaginationData"
     ></vuetable>
     <div>
       <vuetable-pagination-info ref="paginationInfo"
-        info-class="pull-left"
+        info-class="pull-left""
       ></vuetable-pagination-info>
       <vuetable-pagination ref="pagination"
         :css="cssPagination"
@@ -73,7 +84,7 @@ export default {
           name: 'salary',
           titleClass: 'text-center',
           dataClass: 'text-right',
-          callback: 'formatNumber'
+          callback: 'formatNumber',
         }
       ]
   	}
@@ -96,6 +107,9 @@ export default {
         : moment(value, 'YYYY-MM-DD').format(fmt)
     },
     onPaginationData (paginationData) {
+      this.$refs.paginationTop.setPaginationData(paginationData)
+      this.$refs.paginationInfoTop.setPaginationData(paginationData)
+
       this.$refs.pagination.setPaginationData(paginationData)
       this.$refs.paginationInfo.setPaginationData(paginationData)
     },
