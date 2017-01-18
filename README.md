@@ -2,7 +2,7 @@
 
 > Vuetable-2 Tutorial using Bootstrap 3 CSS
 
-You can use the same tutorial content [here](https://github.com/ratiw/vuetable-2-tutorial/doc/README.md), just use the code in this repo instead.
+You can use the same tutorial content [here](https://github.com/ratiw/vuetable-2-tutorial/blob/master/doc/README.md), just use the code in this repo instead.
 
 The code in this repo is modified to use Bootstrap 3 CSS instead of Semantic UI.
 
