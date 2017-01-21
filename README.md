@@ -1,6 +1,6 @@
 # vuetable-2-tutorial-bootstrap
 
-> Vuetable-2 Tutorial using Bootstrap 3 CSS
+> Vuetable-2 [Tutorial](https://github.com/ratiw/vuetable-2-tutorial/tree/master/doc) using Bootstrap 3 CSS
 
 You can use the same tutorial content [here](https://github.com/ratiw/vuetable-2-tutorial/blob/master/doc/README.md), just use the code in this repo instead.
 
