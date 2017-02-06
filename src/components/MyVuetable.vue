@@ -17,7 +17,7 @@
     ></vuetable>
     <div>
       <vuetable-pagination-info ref="paginationInfo"
-        info-class="pull-left""
+        info-class="pull-left"
       ></vuetable-pagination-info>
       <vuetable-pagination ref="pagination"
         :css="cssPagination"
