@@ -14,7 +14,24 @@
       :append-params="moreParams"
       @vuetable:cell-clicked="onCellClicked"
       @vuetable:pagination-data="onPaginationData"
-    ></vuetable>
+    >
+      <template slot="actions" scope="props">
+        <div class="custom-actions">
+          <button class="btn btn-default"
+            @click="onAction('view-item', props.rowData, props.rowIndex)">
+            <i class="glyphicon glyphicon-zoom-in"></i>
+          </button>
+          <button class="btn btn-default"
+            @click="onAction('edit-item', props.rowData, props.rowIndex)">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button class="btn btn-default"
+            @click="onAction('delete-item', props.rowData, props.rowIndex)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </template>
+    </vuetable>
     <div>
       <vuetable-pagination-info ref="paginationInfo"
         info-class="pull-left"
@@ -78,13 +95,13 @@ export default {
           name: '__checkbox',
           titleClass: 'text-center',
           dataClass: 'text-center',
-        },          
+        },
         {
           name: 'name',
           sortField: 'name'
-        }, 
+        },
         {
-          name: 'email', 
+          name: 'email',
           sortField: 'email'
         },
         {
@@ -123,7 +140,13 @@ export default {
           title: 'Actions',
           titleClass: 'text-center',
           dataClass: 'text-center'
-        }
+        },
+        {
+          name: '__slot:actions',
+          title: 'Slot Actions',
+          titleClass: 'text-center',
+          dataClass: 'text-center'
+        },
       ],
       sortOrder: [
         {
