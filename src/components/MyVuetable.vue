@@ -186,6 +186,9 @@ export default {
       console.log('cellClicked: ', field.name)
       this.$refs.vuetable.toggleDetailRow(data.id)
     },
+    onAction (action, data, index) {
+        console.log('custom-actions: ' + action, data.name, index)
+    }
   },
   events: {
     'filter-set' (filterText) {
