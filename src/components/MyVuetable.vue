@@ -2,43 +2,44 @@
   <div class="container">
     <filter-bar></filter-bar>
     <vuetable ref="vuetable"
-      api-url="http://vuetable.ratiw.net/api/users"
+      api-url="https://vuetable.ratiw.net/api/users"
       :fields="fields"
       :css="css"
       pagination-path=""
-      :per-page="20"
+      :per-page="10"
       :multi-sort="true"
       multi-sort-key="ctrl"
       :sort-order="sortOrder"
       detail-row-component="my-detail-row"
       :append-params="moreParams"
+      :render-icon="renderIcon"
       @vuetable:cell-clicked="onCellClicked"
       @vuetable:pagination-data="onPaginationData"
     >
       <template slot="actions" scope="props">
         <div class="custom-actions">
-          <button class="btn btn-default"
+          <button class="btn btn-default btn-sm"
             @click="onAction('view-item', props.rowData, props.rowIndex)">
-            <i class="glyphicon glyphicon-zoom-in"></i>
+            <span class="glyphicon glyphicon-zoom-in"></span>
           </button>
-          <button class="btn btn-default"
+          <button class="btn btn-default btn-sm"
             @click="onAction('edit-item', props.rowData, props.rowIndex)">
-            <i class="glyphicon glyphicon-pencil"></i>
+            <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button class="btn btn-default"
+          <button class="btn btn-default btn-sm"
             @click="onAction('delete-item', props.rowData, props.rowIndex)">
-            <i class="glyphicon glyphicon-remove"></i>
+            <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>
       </template>
     </vuetable>
     <div>
       <vuetable-pagination-info ref="paginationInfo"
+        :css="css.pagination"
         info-class="pull-left"
       ></vuetable-pagination-info>
       <vuetable-pagination ref="pagination"
-        :css="cssPagination"
-        :icons="icons"
+        :css="css.pagination"
         @vuetable-pagination:change-page="onChangePage"
       ></vuetable-pagination>
     </div>
@@ -52,6 +53,8 @@ import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePagination
 import accounting from 'accounting'
 import moment from 'moment'
 import Vue from 'vue'
+import FieldDef from './field-def.js'
+import BootstrapStyle from './bootstrap-css.js'
 import CustomActions from './CustomActions'
 import DetailRow from './DetailRow'
 import FilterBar from './FilterBar'
@@ -70,84 +73,8 @@ export default {
   },
   data () {
   	return {
-      css: {
-        tableClass: 'table table-striped table-bordered',
-        loadingClass: 'loading',
-        ascendingIcon: 'glyphicon glyphicon-chevron-up',
-        descendingIcon: 'glyphicon glyphicon-chevron-down',
-        sortHandleIcon: 'glyphicon glyphicon-menu-hamburger',
-      },
-      cssPagination: {
-        wrapperClass: 'pagination pull-right',
-        activeClass: 'btn-primary',
-        disabledClass: 'disabled',
-        pageClass: 'btn btn-border',
-        linkClass: 'btn btn-border',
-      },
-      icons: {
-        first: '',
-        prev: '',
-        next: '',
-        last: '',
-      },
-      fields: [
-        {
-          name: '__checkbox',
-          titleClass: 'text-center',
-          dataClass: 'text-center',
-        },
-        {
-          name: 'name',
-          sortField: 'name'
-        },
-        {
-          name: 'email',
-          sortField: 'email'
-        },
-        {
-          name: 'age',
-          sortField: 'birthdate',
-          dataClass: 'text-center'
-        },
-        {
-          name: 'birthdate',
-          sortField: 'birthdate',
-          titleClass: 'text-center',
-          dataClass: 'text-center',
-          callback: 'formatDate|DD-MM-YYYY'
-        },
-        {
-          name: 'nickname',
-          sortField: 'nickname',
-          callback: 'allcap'
-        },
-        {
-          name: 'gender',
-          sortField: 'gender',
-          titleClass: 'text-center',
-          dataClass: 'text-center',
-          callback: 'genderLabel'
-        },
-        {
-          name: 'salary',
-          sortField: 'salary',
-          titleClass: 'text-center',
-          dataClass: 'text-right',
-          callback: 'formatNumber',
-        },
-        {
-          name: '__component:custom-actions',
-          title: 'Actions',
-          titleClass: 'text-center',
-          dataClass: 'text-center'
-        },
-        {
-          name: '__slot:actions',
-          title: 'Slot Actions',
-          titleClass: 'text-center',
-          dataClass: 'text-center'
-        },
-      ],
+      css: BootstrapStyle,
+      fields: FieldDef,
       sortOrder: [
         {
           field: 'email',
@@ -159,6 +86,9 @@ export default {
   	}
   },
   methods: {
+    renderIcon (classes, options) {
+      return `<span class="${classes.join(' ')}"></span>`
+    },
     allcap (value) {
       return value.toUpperCase()
     },
@@ -215,5 +145,9 @@ export default {
 }
 .vuetable-pagination-info {
   margin-top: 8px !important;
+}
+span.sort-icon {
+  float: right;
+  color: #ff9100;
 }
 </style>

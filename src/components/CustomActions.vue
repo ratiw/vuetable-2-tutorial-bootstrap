@@ -1,8 +1,8 @@
 <template>
     <div class="custom-actions">
-      <button class="btn btn-default" @click="itemAction('view-item', rowData, rowIndex)"><i class="glyphicon glyphicon-zoom-in"></i></button>
-      <button class="btn btn-default" @click="itemAction('edit-item', rowData, rowIndex)"><i class="glyphicon glyphicon-pencil"></i></button>
-      <button class="btn btn-default" @click="itemAction('delete-item', rowData, rowIndex)"><i class="glyphicon glyphicon-remove"></i></button>
+      <button class="btn btn-default btn-sm" @click="itemAction('view-item', rowData, rowIndex)"><span class="glyphicon glyphicon-zoom-in"></span></button>
+      <button class="btn btn-default btn-sm" @click="itemAction('edit-item', rowData, rowIndex)"><span class="glyphicon glyphicon-pencil"></span></button>
+      <button class="btn btn-default btn-sm" @click="itemAction('delete-item', rowData, rowIndex)"><span class="glyphicon glyphicon-remove"></span></button>
     </div>
   </template>
 
