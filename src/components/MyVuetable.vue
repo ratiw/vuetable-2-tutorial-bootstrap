@@ -85,6 +85,10 @@ export default {
       moreParams: {}
   	}
   },
+  mounted () {
+    this.$events.listen('filter-set', filterText => this.onFilterSet(filterText))
+    this.$events.listen('filter-reset', () => this.onFilterReset())
+  },
   methods: {
     renderIcon (classes, options) {
       return `<span class="${classes.join(' ')}"></span>`
@@ -118,21 +122,19 @@ export default {
     },
     onAction (action, data, index) {
         console.log('custom-actions: ' + action, data.name, index)
-    }
-  },
-  events: {
-    'filter-set' (filterText) {
+    },
+    onFilterSet (filterText) {
       this.moreParams = {
         'filter': filterText
       }
       Vue.nextTick( () => this.$refs.vuetable.refresh())
     },
-    'filter-reset' () {
+    onFilterReset () {
       this.moreParams = {}
       this.$refs.vuetable.refresh()
       Vue.nextTick( () => this.$refs.vuetable.refresh())
     }
-  }
+  },
 }
 </script>
 <style>
