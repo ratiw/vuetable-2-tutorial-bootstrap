@@ -2,10 +2,11 @@
   <div class="container">
     <filter-bar></filter-bar>
     <vuetable ref="vuetable"
-      api-url="https://vuetable.ratiw.net/api/users"
+      :api-mode="false"
+      :data="localData"
       :fields="fields"
-      :css="css"
       pagination-path=""
+      :css="css"
       :per-page="10"
       :multi-sort="true"
       multi-sort-key="ctrl"
@@ -58,6 +59,7 @@ import BootstrapStyle from './bootstrap-css.js'
 import CustomActions from './CustomActions'
 import DetailRow from './DetailRow'
 import FilterBar from './FilterBar'
+import LocalData from '../static/data.js'
 import VueEvents from 'vue-events'
 Vue.use(VueEvents)
 
@@ -82,12 +84,14 @@ export default {
           direction: 'asc'
         }
       ],
-      moreParams: {}
+      moreParams: {},
+      localData: LocalData
   	}
   },
   mounted () {
     this.$events.listen('filter-set', filterText => this.onFilterSet(filterText))
     this.$events.listen('filter-reset', () => this.onFilterReset())
+    console.log('MyVuetable - mounted - localData', this.localData)
   },
   methods: {
     renderIcon (classes, options) {
