@@ -1,9 +1,12 @@
+
 export default {
-  tableClass: 'table table-striped table-bordered',
-  loadingClass: 'loading',
-  ascendingIcon: 'glyphicon glyphicon-chevron-up',
-  descendingIcon: 'glyphicon glyphicon-chevron-down',
-  handleIcon: 'glyphicon glyphicon-menu-hamburger',
+  table: {
+      tableClass: 'table table-bordered table-striped table-hover',
+      ascendingIcon: 'glyphicon glyphicon-chevron-up',
+      descendingIcon: 'glyphicon glyphicon-chevron-down',
+      loadingClass: 'loading',
+      handleIcon: 'glyphicon glyphicon-menu-hamburger',
+  },
   pagination: {
     infoClass: 'pull-left',
     wrapperClass: 'vuetable-pagination pull-right',
@@ -12,10 +15,10 @@ export default {
     pageClass: 'btn btn-border',
     linkClass: 'btn btn-border',
     icons: {
-      first: '',
-      prev: '',
-      next: '',
-      last: '',
+        first: '',
+        prev: '',
+        next: '',
+        last: '',
     },
   },
 }
